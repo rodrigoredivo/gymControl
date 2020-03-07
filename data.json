@@ -1,0 +1,13 @@
+{
+  "instructors": [
+    {
+      "id": 1,
+      "avatar_url": "http:github.com.br/RodrigoRedivo",
+      "name": "Rodrigo Augusto Redivo",
+      "birth": 1583539200000,
+      "services": "Musculação e Crossfit",
+      "gender": "M",
+      "created_at": 1583597436353
+    }
+  ]
+}
