@@ -1,6 +1,28 @@
 const fs = require('fs')
 const data = require('./data.json')
 
+// SHOW
+exports.show = function(req, res) {
+  const { id } = req.params
+
+  const foundInstructor = data.instructors.find(function(instructor){
+    return instructor.id == id
+  })
+
+  if (!foundInstructor) { 
+    return res.send('Instructor not found!')
+  }
+
+  const instructor = {
+    ...foundInstructor,
+    age: '',
+    services: foundInstructor.services.split(","),
+    created_at: '',
+  }
+
+  return res.render('instructors/show' , { instructor})
+}
+
 // CREATE
 exports.post = function(req, res) {
   const keys = Object.keys(req.body) // CRIANDO ARRAY 
@@ -21,11 +43,11 @@ exports.post = function(req, res) {
 
   data.instructors.push({
     id,
-    avatar_url,
     name,
+    avatar_url,
     birth,
-    services,
     gender,
+    services,
     created_at
   })
 
