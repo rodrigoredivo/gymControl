@@ -11,5 +11,18 @@ module.exports = {
     }
 
     return age
+  },
+  date: function(timestamp) {
+      const date = new Date(timestamp) 
+      // criando novo objeto de data , e passa a data com seu local time 
+
+      const year = date.getUTCFullYear() //pegando o ano e tranformando a data para universal
+
+      const month = `0${date.getUTCMonth() + 1}`.slice(-2) //pegando o mês e tranformando a data para universal
+
+      const day = `0${date.getUTCDate()}` //pegando o dia e tranformando a data para universal
+
+      return `${year}-${month}-${day}`
   }
+
 }
