@@ -3,6 +3,13 @@ const Intl = require('intl')
 const data = require('./data.json')
 const { age, date } = require('./utils')
 
+// INDEX
+  exports.index = function(req, res) {
+
+    return res.render('instructors/index', { instructors: data.instructors})
+  }
+
+
 // SHOW
 exports.show = function(req, res) {
   const { id } = req.params
