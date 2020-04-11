@@ -1,7 +1,12 @@
 {
+  "members": [
+    {
+
+    }
+  ],
   "instructors": [
     {
-      "id": "1",
+      "id": 1,
       "avatar_url": "https://source.unsplash.com/collection/9419482/900x900",
       "name": "Rodrigo Augusto Redivo",
       "birth": 946684800000,
@@ -10,7 +15,7 @@
       "created_at": 1583597436353
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Rodrigo Augusto Redivo",
       "avatar_url": "https://source.unsplash.com/collection/9419482/900x900",
       "birth": 695865600000,
@@ -19,7 +24,7 @@
       "created_at": 1584816503937
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Rodrigo Augusto Redivo",
       "avatar_url": "https://source.unsplash.com/collection/9419482/900x900",
       "birth": 695865600000,

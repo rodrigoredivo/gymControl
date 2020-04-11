@@ -1,24 +1,23 @@
 const fs = require('fs')
 const Intl = require('intl')
-const data = require('./data.json')
-const { age, date } = require('./utils')
+const data = require('../data.json')
+const { age, date } = require('../utils')
 
 // INDEX
-  exports.index = function(req, res) {
+exports.index = function (req, res) {
 
-    return res.render('instructors/index', { instructors: data.instructors})
-  }
-
+  return res.render('instructors/index', { instructors: data.instructors })
+}
 
 // SHOW
-exports.show = function(req, res) {
+exports.show = function (req, res) {
   const { id } = req.params
 
-  const foundInstructor = data.instructors.find(function(instructor){
+  const foundInstructor = data.instructors.find(function (instructor) {
     return instructor.id == id
   })
 
-  if (!foundInstructor) { 
+  if (!foundInstructor) {
     return res.send('Instructor not found!')
   }
 
@@ -29,16 +28,20 @@ exports.show = function(req, res) {
     created_at: new Intl.DateTimeFormat('pt-BR').format(foundInstructor.created_at),
   }
 
-  return res.render('instructors/show' , { instructor})
+  return res.render('instructors/show', { instructor })
 }
 
 // CREATE
-exports.post = function(req, res) {
+exports.create = function (req, res) {
+  return res.render('instructors/create')
+}
+
+exports.post = function (req, res) {
   const keys = Object.keys(req.body) // CRIANDO ARRAY 
 
   for (key of keys) {
     //  req.body.key == ''
-    if(req.body[key] == '') {
+    if (req.body[key] == '') {
       return res.send('Please, fill all fields!')
     }
   }
@@ -61,47 +64,47 @@ exports.post = function(req, res) {
   })
 
   // CRIANDO CALL BACK
-  fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
+  fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
     if (err) return res.send('Write file error!')
 
     return res.redirect('./instructors')
   })
-  
+
 }
 
 // UPDATE
-exports.edit = function(req, res) {
+exports.edit = function (req, res) {
   const { id } = req.params
 
-  const foundInstructor = data.instructors.find(function(instructor){
+  const foundInstructor = data.instructors.find(function (instructor) {
     return instructor.id == id
   })
 
-  if (!foundInstructor) { 
+  if (!foundInstructor) {
     return res.send('Instructor not found!')
   }
 
   const instructor = {
     ...foundInstructor,
     birth: date(foundInstructor.birth)
-  }  
+  }
 
-  return res.render('instructors/edit' , { instructor})
+  return res.render('instructors/edit', { instructor })
 }
 
 // put
-exports.put = function(req, res) {
+exports.put = function (req, res) {
   const { id } = req.body
   let index = 0
 
-  const foundInstructor = data.instructors.find(function(instructors, foundIndex){
-    if(id == instructors.id){
+  const foundInstructor = data.instructors.find(function (instructors, foundIndex) {
+    if (id == instructors.id) {
       index = foundIndex
       return true
     }
   })
 
-  if (!foundInstructor) { 
+  if (!foundInstructor) {
     return res.send('Instructor not found!')
   }
 
@@ -114,8 +117,8 @@ exports.put = function(req, res) {
 
   data.instructors[index] = instructors
 
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
-    if(err) {
+  fs.writeFile("data.json", JSON.stringify(data, null, 2), function (err) {
+    if (err) {
       return res.send("Write error!")
     }
 
@@ -125,16 +128,16 @@ exports.put = function(req, res) {
 
 
 // DELETE
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   const { id } = req.body
 
-  const filteredInstructors = data.instructors.filter(function(instructors){
+  const filteredInstructors = data.instructors.filter(function (instructors) {
     return instructors.id != id
   })
 
-  data.instructors = filteredInstructors 
+  data.instructors = filteredInstructors
 
-  fs.writeFile("data.json", JSON.stringify(data, null, 2),  function(err){
+  fs.writeFile("data.json", JSON.stringify(data, null, 2), function (err) {
     if (err) {
       return res.send("Write error!")
     }
