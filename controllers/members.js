@@ -1,5 +1,4 @@
 const fs = require('fs')
-const Intl = require('intl')
 const data = require('../data.json')
 const { age, date } = require('../utils')
 
