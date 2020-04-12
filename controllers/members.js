@@ -33,31 +33,32 @@ exports.create = function (req, res) {
   return res.render('members/create')
 }
 
+// POST
 exports.post = function (req, res) {
   const keys = Object.keys(req.body) // CRIANDO ARRAY 
-
+  //VERIFICANDO SE TODOS OS POST ESTÃO PREENCHIDOS
   for (key of keys) {
-    //  req.body.key == ''
     if (req.body[key] == '') {
       return res.send('Please, fill all fields!')
     }
   }
 
-  // DESESTRUTURAÇÃO DE OBJETO
-  let { avatar_url, birth, name, services, gender } = req.body
+  // DESESTRUTURAÇÃO DE OBJETO COM OS CAMPOS QUE EU QUERO
+  //let { avatar_url, birth, name, services, gender } = req.body
 
   birth = Date.parse(req.body.birth)
-  const created_at = Date.now() //data de agora
-  const id = Number(data.members.length + 1)
+  
+  let id = 1
+  const lastMember = data.members[data.members.length - 1]
+
+  if (lastMember) {
+    id = lastMember.id + 1
+  }
 
   data.members.push({
     id,
-    name,
-    avatar_url,
+    ...req.body,
     birth,
-    gender,
-    services,
-    created_at
   })
 
   // CRIANDO CALL BACK
@@ -89,7 +90,7 @@ exports.edit = function (req, res) {
   return res.render('members/edit', { member })
 }
 
-// put
+// PUT
 exports.put = function (req, res) {
   const { id } = req.body
   let index = 0

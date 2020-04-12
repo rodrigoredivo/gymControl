@@ -1,6 +1,16 @@
 {
   "members": [
-    {}
+    {
+      "id": 1,
+      "avatar_url": "https://images.unsplash.com/photo-1583454006900-4c80b3c50ce6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      "name": "Rodrigo",
+      "email": "rodrigo.a.redivo@gmail.com",
+      "birth": 695865600000,
+      "gender": "M",
+      "blood": "O+",
+      "weight": "84",
+      "height": "191"
+    }
   ],
   "instructors": [
     {
