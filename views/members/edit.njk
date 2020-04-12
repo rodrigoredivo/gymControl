@@ -25,4 +25,14 @@
     </section>
   </div>
 
+  <script>
+    const formDelete = document.querySelector("#form-delete")
+    formDelete.addEventListener("submit" , function(event){
+      const confimation = confirm("Want to delete?")
+      if (!confimation) {
+        event.preventDefault()
+      }
+    })
+  </script>
+
 {% endblock content %}
