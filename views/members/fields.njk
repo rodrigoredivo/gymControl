@@ -20,14 +20,14 @@
 </div>
 
 <div class="item">
-  <div>Data de nascimento</div>
+  <div>Date of birth</div>
   <div>
     <input type="date" name="birth" value="{{ member.birth }}">
   </div>
 </div>
 
 <div class="item">
-  <div>Sexo</div>
+  <div>Sex</div>
   <div>
     <span>
       <input type="radio" name="gender" value="M" {% if member.gender == 'M' %} checked="checked" {% endif %}>Masculino
@@ -39,7 +39,7 @@
 </div>
 
 <div class="item">
-  <div>Type Sanguineo</div>
+  <div>Type blood</div>
   <div>
     <select name="blood">
       <option value="A+" {% if member.blood == "A+" %} selected{% endif %}>
@@ -71,17 +71,17 @@
 </div>
 
 <div class="item">
-  <div>Peso (kg)</div>
+  <div>Weight (kg)</div>
   <div>
     <input type="number" name="weight" value="{{ member.weight }}">
   </div>
 </div>
 
 <div class="item">
-  <div>Altura (cm)</div>
+  <div>Height (cm)</div>
   <div>
     <input type="number" name="height" value="{{ member.height }}">
   </div>
 </div>
 
-<button type="submit">Salvar</button>
+<button type="submit">Save</button>
