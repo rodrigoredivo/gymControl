@@ -20,9 +20,15 @@ module.exports = {
 
       const month = `0${date.getUTCMonth() + 1}`.slice(-2) //pegando o mês e tranformando a data para universal
 
-      const day = `0${date.getUTCDate()}` //pegando o dia e tranformando a data para universal
+      const day = `0${date.getUTCDate()}`.slice(-2) //pegando o dia e tranformando a data para universal
 
-      return `${year}-${month}-${day}`
+      return {
+        day,
+        month,
+        year,
+        iso: `${year}-${month}-${day}`, //iso
+        birthDay: `${day}/${month}` //01/10
+      }
   }
 
 }

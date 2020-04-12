@@ -22,7 +22,7 @@ exports.show = function (req, res) {
 
   const member = {
     ...foundMember,
-    age: age(foundMember.birth),
+    birth: date(foundMember.birth).birthDay,
   }
 
   return res.render('members/show', { member })

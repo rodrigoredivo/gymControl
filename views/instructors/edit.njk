@@ -7,18 +7,18 @@
 
     <section class="details">
 
-      <form  method="post" action="/members?_method=PUT">
+      <form  method="post" action="/instructors?_method=PUT">
 
-        <h3>Editar Members</h3>
+        <h3>Editar Instructor</h3>
 
-        {% include 'members/fields.njk' %}
+        {% include 'instructors/fields.njk' %}
 
-        <input type="hidden" name="id" value={{members.id}}>
+        <input type="hidden" name="id" value={{instructor.id}}>
 
       </form>
 
-      <form id="form-delete" action="/members?_method=DELETE" method="post">
-        <input type="hidden" name="id" value={{members.id}}>
+      <form id="form-delete" action="/instructors?_method=DELETE" method="post">
+        <input type="hidden" name="id" value={{instructor.id}}>
         <button type="submit">Deletar</button>
       </form>
 
