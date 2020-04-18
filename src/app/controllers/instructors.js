@@ -1,3 +1,4 @@
+const { age, date } = require('../../lib/utils')
 const Instructor = require('../model/instructor')
 
 module.exports = {
@@ -12,7 +13,17 @@ module.exports = {
     return res.render('instructors/create')
   },
   show(req, res) {
-    return res.render('instructors/show')
+    Instructor.find(req.params.id, function(instructor) {
+      if (!instructor) return res.send("Instructor not found")
+
+      instructor.age = age(instructor.birth)
+      instructor.services = instructor.services.split(",")
+
+      instructor.created_at = date(instructor.created_at).format
+      
+      return res.render("instructors/show", { instructor })
+    })
+
   },
   post(req, res) {
     const keys = Object.keys(req.body) // CRIANDO ARRAY 
