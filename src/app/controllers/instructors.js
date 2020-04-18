@@ -4,8 +4,13 @@ const db = require('../../config/db')
 
 module.exports = {
   index(req, res) {
+
+    db.query(`SELECT * FROM instructors`, function(err, results) {
+      if (err) res.send("Database error!")
+
+      return res.render("instructors/index", {instructors: results.rows })
+    })
     
-    return res.render('instructors/index')
   },
   create(req, res) {
     return res.render('instructors/create')
