@@ -1,14 +1,10 @@
-const Intl = require('intl')
-const { age, date } = require('../../lib/utils')
-const db = require('../../config/db')
+const Instructor = require('../model/instructor')
 
 module.exports = {
   index(req, res) {
+      Instructor.all(function(instructors){
 
-    db.query(`SELECT * FROM instructors`, function(err, results) {
-      if (err) res.send("Database error!")
-
-      return res.render("instructors/index", {instructors: results.rows })
+      return res.render("instructors/index", {instructors})
     })
     
   },
@@ -26,34 +22,12 @@ module.exports = {
         return res.send('Please, fill all fields!')
       }
     }
-
-    const query = `
-      INSERT INTO instructors (
-        name,
-        avatar_url,
-        gender,
-        services,
-        birth,
-        created_at
-      ) VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING id
-    `
-
-    const values = [
-      req.body.name,
-      req.body.avatar_url,
-      req.body.gender,
-      req.body.services,
-      date(req.body.birth).iso,
-      date(Date.now()).iso
-    ]
-
-    db.query(query, values, function (err, results) {
-      if(err) return res.send("Database Error!")
-      
-      return res.redirect(`/instructors/${results.rows[0].id}`)
-    })
     
+    Instructor.create(req.body, function(instructor){
+
+      return res.redirect(`/instructors/${instructor.id}`)
+    })
+
   },
   edit(req, res) {
     return
