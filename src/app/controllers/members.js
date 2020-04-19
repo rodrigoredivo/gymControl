@@ -1,15 +1,26 @@
-const { age, date } = require('../../lib/utils')
-
+const { date } = require('../../lib/utils')
+const Member = require('../model/member')
 
 module.exports = {
   index(req, res) {
-    return res.render('members/index')
+      Member.all(function(members){
+
+      return res.render("members/index", {members})
+    })
+    
   },
   create(req, res) {
     return res.render('members/create')
   },
   show(req, res) {
-    return res.render('members/show', { member })
+    Member.find(req.params.id, function(member) {
+      if (!member) return res.send("Member not found")
+
+      member.birth = date(member.birth).birthDay
+      
+      return res.render("members/show", { member })
+    })
+
   },
   post(req, res) {
     const keys = Object.keys(req.body) // CRIANDO ARRAY 
@@ -19,14 +30,21 @@ module.exports = {
         return res.send('Please, fill all fields!')
       }
     }
+    
+    Member.create(req.body, function(member){
 
-    // DESESTRUTURAÇÃO DE OBJETO
-    let { avatar_url, birth, name, services, gender } = req.body
+      return res.redirect(`/members/${member.id}`)
+    })
 
-    return  
   },
   edit(req, res) {
-    return
+    Member.find(req.params.id, function(member) {
+      if (!member) return res.send("Member not found")
+
+      member.birth = date(member.birth).iso
+           
+      return res.render("members/edit", { member })
+    })
   },
   put(req, res) {
     const keys = Object.keys(req.body) // CRIANDO ARRAY 
@@ -37,9 +55,17 @@ module.exports = {
       }
     }
 
-    return
+    Member.update(req.body, function() {
+
+      return res.redirect(`/members/${req.body.id}`)
+
+    })
   },
   delete(req, res) {
-    return
-  },
+    Member.delete(req.body.id, function() {
+
+      return res.redirect(`/members`)
+
+    })
+  }
 }
