@@ -12,10 +12,17 @@ module.exports = {
 
     const params = {
       filter,
+      page,
       limit,
       offset,
       callback(instructors) {
-        return res.render("instructors/index", { instructors, filter })
+
+        const pagination = {
+          total: Math.ceil(instructors[0].total / limit),
+          page
+        }
+
+        return res.render("instructors/index", { instructors, pagination, filter })
       }
     }
 
